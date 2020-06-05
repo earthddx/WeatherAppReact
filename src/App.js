@@ -1,15 +1,12 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import { useMediaQuery } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import TwitterIcon from "@material-ui/icons/Twitter";
 
-//import { fetchWeather } from "./helpers/helper";
 import theme from "./theme";
-
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -40,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    maxHeight: 300,
+    minHeight: 300,
   },
   info: {
     margin: "0 auto",
@@ -54,10 +53,9 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   contactInfo: {
-    position: "absolute",
-    bottom: 160,
-    left: 0,
-    right: 0,
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
   },
   socialLinks: {
     display: "flex",
@@ -85,7 +83,6 @@ function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
   const [isCelsius, setIsCelsius] = useState(true);
-  const greaterThanSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
   const classes = useStyles();
 
   const URL = "https://api.openweathermap.org/data/2.5/weather";
@@ -188,46 +185,45 @@ function App() {
             </div>
           </Paper>
         )}
-        {greaterThanSm && (
-          <div className={classes.contactInfo}>
-            <div className={classes.socialLinks}>
-              {" "}
-              <a
-                href="https://github.com/earthddx"
-                rel="noopener noreferrer"
-                target="_blank"
-                className={classes.link}
-              >
-                <GitHubIcon />
-              </a>
-              <a
-                href="https://twitter.com/ArtemMurzo"
-                rel="noopener noreferrer"
-                target="_blank"
-                className={classes.link}
-              >
-                <TwitterIcon />
-              </a>
-            </div>
-            <div className={classes.footer}>
-              <h4>pwa built with react and material-ui</h4>
-              <p>
-                <a
-                  href="https://openweathermap.org/api"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className={classes.link}
-                  style={{color: theme.palette.primary.main}}
-                >
-                  OpenWeatherAPI
-                </a>
-              </p>
-              <span role="img" aria-label="emoji">
-                made with ❤️ 2020
-              </span>
-            </div>
+
+        <div className={classes.contactInfo}>
+          <div className={classes.socialLinks}>
+            {" "}
+            <a
+              href="https://github.com/earthddx"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
+              <GitHubIcon />
+            </a>
+            <a
+              href="https://twitter.com/ArtemMurzo"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
+              <TwitterIcon />
+            </a>
           </div>
-        )}
+          <div className={classes.footer}>
+            <h4>pwa built with react and material-ui</h4>
+            <p>
+              <a
+                href="https://openweathermap.org/api"
+                rel="noopener noreferrer"
+                target="_blank"
+                className={classes.link}
+                style={{ color: theme.palette.primary.main }}
+              >
+                OpenWeatherAPI
+              </a>
+            </p>
+            <span role="img" aria-label="emoji">
+              made with ❤️ 2020
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
